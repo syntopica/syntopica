@@ -42,7 +42,7 @@ sessions. Today nothing offers that:
 
 ### The repository `syntopica/syntopica`
 
-Public, MIT, Python 3.12 with uv, the same `baseline-py` gate and CI shape as
+Public, MIT, Python 3.12 with uv, the same `codeality-py` gate and CI shape as
 `syntopica/brain`. Layout:
 
 ```
@@ -268,7 +268,7 @@ runs `doctor`, and fails the job unless both engines report PASS. It runs the
 which the runner does not have; its `init` and `doctor` paths are covered by
 the unit tests with a stub checkout.
 
-A change to this repository is finished when `uv run baseline-py gate` passes
+A change to this repository is finished when `uv run codeality-py gate` passes
 and the smoke job is green.
 
 ## Out of scope
