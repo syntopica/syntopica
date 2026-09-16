@@ -33,6 +33,10 @@ def write_instance(data: Path, document: Mapping[str, object]) -> None:
         target = data / ".config" / name
         if not target.exists():
             target.write_text(text, encoding="utf-8")
+    # The index is a required path too; `brain index` rewrites it from the pages.
+    index = data / cast(str, brain["index"])
+    if not index.exists():
+        index.write_text("# Index\n", encoding="utf-8")
     ignore = data / ".gitignore"
     present = ignore.read_text(encoding="utf-8").splitlines() if ignore.exists() else []
     additions = [entry for entry in STATE_ENTRIES if entry not in present]
