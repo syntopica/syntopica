@@ -112,6 +112,22 @@ starts atrium as `atrium-mcp` from the PATH, so it needs
 as well, and resolves the instance from `SYNTOPICA_DATA` or the working
 directory.
 
+With atrium and Claude Code, also register the session recorder: it makes the
+session write its own memory record when enough work has accumulated, on the
+account the person already pays for, so no batch synthesis lane is needed. Add
+to `hooks.Stop` in `~/.claude/settings.json` (paths absolute; `SYNTOPICA_DATA`
+is the data directory from step 2):
+
+```json
+{"matcher": "*", "hooks": [{"type": "command", "timeout": 30,
+  "command": "SYNTOPICA_DATA=/abs/path/to/data sh /abs/path/to/engines/atrium/hooks/claude-code/stop-record-episode.sh"}]}
+```
+
+Result: after a long turn Claude Code refuses to stop once and asks the model
+to run `atrium record-session --checkpoint <id>`; the record lands in
+`<data>/atrium/synthesis/records/`. How it decides and what it refuses:
+`engines/atrium/docs/designs/session-producer.md`.
+
 ### 7. First page
 
 Read `engines/brain/SCHEMA.md`, write one page under `pages/`, then:

@@ -16,7 +16,9 @@ Paste this to Claude Code or Codex:
 
 It will ask which components you want, install them, verify every engine with
 `syntopica doctor`, and connect itself. `AGENTS.md` is the whole procedure; you
-can follow it by hand too.
+can follow it by hand too. With atrium and Claude Code it also registers the
+session recorder, the hook that makes each session write its own memory
+record on your existing subscription: no second account, no batch job.
 
 ## The hub CLI
 
