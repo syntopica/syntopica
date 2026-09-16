@@ -1,0 +1,55 @@
+[project]
+name = "syntopica"
+version = "0.1.0"
+description = "Onboarding hub for a Syntopica instance: assemble the configuration, verify every engine, connect the agent"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12"
+dependencies = [
+  "jsonschema>=4.23,<5",
+]
+
+[project.scripts]
+syntopica = "syntopica.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["syntopica*"]
+
+[tool.setuptools.package-data]
+syntopica = ["skills/syntopica/SKILL.md"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.deptry.per_rule_ignores]
+DEP004 = ["pytest"]
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 65
+
+[dependency-groups]
+quality = [
+  "busirocket-baseline-py>=0.1,<1",
+  "deptry>=0.20,<1",
+  "mypy>=1.11,<2",
+  "pip-audit>=2.7,<3",
+  "pytest>=8,<10",
+  "pytest-cov>=5,<8",
+  "ruff>=0.15,<1",
+  "types-jsonschema>=4.23,<5",
+]
+
+# uv sync installs only the dev group by default; the gate lives in quality,
+# so a fresh clone needs it named here or the README's one command fails.
+[tool.uv]
+default-groups = ["quality"]
