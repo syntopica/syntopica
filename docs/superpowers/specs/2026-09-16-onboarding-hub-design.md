@@ -192,7 +192,7 @@ directories, because those are the clients' documented contract.
 
 ### The skill
 
-`syntopica` is authored at `<rocket-agents>/src/skills/core/syntopica/SKILL.md`,
+`syntopica` is authored in the agents repository at `src/skills/core/syntopica/SKILL.md`,
 registered in `skill-rules.map.json`, and compiled by the existing rocket-agents
 pipeline. It is the owner's `brain` skill with everything personal removed: no
 prettier step, no concurrent-sessions rule, no model routing table, no
