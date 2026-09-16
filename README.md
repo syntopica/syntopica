@@ -20,12 +20,54 @@ can follow it by hand too.
 
 ## The hub CLI
 
+Start with brain alone: a local Markdown wiki, an index and an offline link
+graph, in one directory you own. You need Git, uv and Python 3.12 or newer.
+Installing the hub does not clone the engines; `init` expects them under
+`engines/` and tells you which one is missing.
+
 ```bash
 uv tool install git+https://github.com/syntopica/syntopica
-syntopica init --with brain,clips,atrium   # write syntopica.config.json for the chosen components
-syntopica doctor                            # run every selected engine's doctor
-syntopica client claude                     # install the skill, register atrium (also: codex)
+mkdir -p wiki/engines && cd wiki
+git clone https://github.com/syntopica/brain.git engines/brain
+(cd engines/brain && uv sync)
+syntopica init --with brain          # write syntopica.config.json, create the paths, git init
+cat > pages/start.md <<'PAGE'
+---
+title: Start
+type: concept
+updated: 2026-09-16
+summary: 'The starting point for this wiki.'
+sources: []
+---
+
+Decisions live in [[pages/decisions]].
+PAGE
+cat > pages/decisions.md <<'PAGE'
+---
+title: Decisions
+type: concept
+updated: 2026-09-16
+summary: 'Decisions recorded as linked pages.'
+sources: []
+---
+
+Back to [[pages/start]].
+PAGE
+engines/brain/bin/brain index        # index.md from the pages
+engines/brain/bin/brain graph        # graph.html, orphans, dangling links
+syntopica doctor                     # every selected engine's doctor
 ```
+
+Expect `index.md: 2 pages`, `pages 2  links 2  orphans 0` and `PASS brain
+doctor`. Links carry the page directory, as in `[[pages/decisions]]`.
+
+Add clips and atrium afterwards by cloning them under `engines/` and following
+`AGENTS.md`; each needs more than a clone (clips a publishable Git remote,
+atrium an exported conversation archive), and `syntopica doctor` says so.
+`syntopica client claude` (or `codex`) is optional: it installs the skill under
+`~/.claude/skills/syntopica` (or `~/.codex/skills/syntopica`) and registers the
+atrium MCP server in that client's user configuration with absolute paths to
+this wiki.
 
 ## Repositories
 
