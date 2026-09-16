@@ -1,0 +1,16 @@
+#!/bin/sh
+# Copy the compiled portable skill from a rocket-agents checkout. The skill is
+# authored there; this repository only vendors the output, so the source path
+# has to be given: there is no default checkout location.
+set -eu
+source="${1:-${ROCKET_AGENTS:-}}"
+if [ -z "$source" ]; then
+  echo "usage: bin/sync-skill <rocket-agents checkout>   (or set ROCKET_AGENTS)" >&2
+  exit 2
+fi
+from="$source/dist/skills-portable/core/syntopica/SKILL.md"
+[ -f "$from" ] || { echo "no compiled skill at $from; run pnpm run skills:compile there" >&2; exit 1; }
+cd "$(dirname "$0")/.."
+mkdir -p syntopica/skills/syntopica
+cp "$from" syntopica/skills/syntopica/SKILL.md
+echo "vendored $from"

@@ -39,7 +39,10 @@ def test_all_selected_engines_pass(
         {
             "brain": {},
             "clips": {},
-            "engines": {"brain": {"path": "../engines/brain"}, "clips": {"path": "../engines/clips"}},
+            "engines": {
+                "brain": {"path": "../engines/brain"},
+                "clips": {"path": "../engines/clips"},
+            },
         },
     )
     assert run_doctor(str(data)) == 0

@@ -13,5 +13,5 @@ def test_brain_is_implied() -> None:
 
 @pytest.mark.parametrize("spec", ["", "capture", "brain,,clips", "brain, clipper"])
 def test_unknown_or_empty_component_is_named(spec: str) -> None:
-    with pytest.raises(ValueError, match="unknown component|no component"):
+    with pytest.raises(ValueError, match=r"unknown component|no component"):
         parse_components(spec)

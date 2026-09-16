@@ -5,7 +5,7 @@ from typing import cast
 
 
 def selected_components(document: Mapping[str, object]) -> tuple[str, ...]:
-    """brain always; clips with its section and engine; atrium with both state sections."""
+    """Brain always; clips with its section and engine; atrium with both state sections."""
     engines = cast(Mapping[str, object], document.get("engines", {}))
     chosen = ["brain"]
     if "clips" in document and "clips" in engines:
