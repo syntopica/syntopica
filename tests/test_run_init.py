@@ -17,6 +17,7 @@ def test_brain_only_writes_a_valid_instance(
     for directory in ("pages", "sources", ".ingest", "clips", ".config"):
         assert (tmp_path / directory).is_dir(), directory
     assert (tmp_path / ".config" / "project-aliases.json").read_text() == "{}\n"
+    assert (tmp_path / "index.md").read_text() == "# Index\n"
     assert (tmp_path / ".git").is_dir()
     ignored = (tmp_path / ".gitignore").read_text().splitlines()
     assert {"engines/", "atrium/", "conversations/", "syntopica.local.json"} <= set(ignored)
