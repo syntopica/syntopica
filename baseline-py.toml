@@ -1,0 +1,17 @@
+# Managed by baseline-py.
+schema-version = 1
+source-roots = ["syntopica"]
+test-roots = ["tests"]
+respect-gitignore = true
+coverage-threshold = 65
+
+[limits]
+max-file-lines = 150
+test-max-file-lines = 300
+
+[roles]
+data = ["syntopica/components.py", "syntopica/engine_repositories.py"]
+registry = []
+entrypoint = ["syntopica/cli.py"]
+generated = []
+namespace-init = ["syntopica/__init__.py"]
