@@ -1,7 +1,6 @@
 """doctor: every selected engine's own doctor, then how the clients see the instance."""
 
 import os
-import subprocess
 import sys
 from pathlib import Path
 from typing import cast
@@ -12,17 +11,11 @@ from syntopica.engines_for_components import engines_for_components
 from syntopica.find_data_directory import find_data_directory
 from syntopica.mcp_server_listed import mcp_server_listed
 from syntopica.read_config_document import read_config_document
+from syntopica.run_client_command import run_client_command
 from syntopica.run_engine_doctor import run_engine_doctor
 from syntopica.selected_components import selected_components
 
 CLIENTS = ("claude", "codex")
-
-
-def _client_output(argv: tuple[str, ...]) -> str:
-    try:
-        return subprocess.run(argv, capture_output=True, text=True, check=False).stdout  # noqa: S603
-    except OSError:
-        return ""
 
 
 def run_doctor(data: str | None) -> int:
@@ -58,6 +51,6 @@ def run_doctor(data: str | None) -> int:
         installed = client_skill_directory(client, home).is_dir()
         print(f"INFO {client} skill: {'installed' if installed else 'not installed'}")
         if "atrium" in components:
-            registered = mcp_server_listed(client, _client_output)
+            registered = mcp_server_listed(client, run_client_command)
             print(f"INFO {client} mcp atrium: {'registered' if registered else 'not registered'}")
     return int(any(not passed for passed, _ in summary))

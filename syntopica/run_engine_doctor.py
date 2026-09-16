@@ -11,7 +11,7 @@ def run_engine_doctor(
     """Never raise: a doctor that cannot start is a failing doctor with a reason."""
     env = {**environ, "SYNTOPICA_DATA": str(data)}
     try:
-        result = subprocess.run(  # noqa: S603 -- argv from the engine table, no shell
+        result = subprocess.run(
             command, cwd=checkout, env=env, capture_output=True, text=True, check=False
         )
     except OSError as error:

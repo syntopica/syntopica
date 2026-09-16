@@ -1,0 +1,7 @@
+{
+  "name": "syntopica",
+  "description": "Use a Syntopica instance: retrieval, page writing, ingest and health checks.",
+  "version": "0.1.0",
+  "skills": "./skills",
+  "mcpServers": "./.mcp.json"
+}

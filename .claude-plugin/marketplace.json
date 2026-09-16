@@ -1,0 +1,15 @@
+{
+  "name": "syntopica",
+  "description": "Syntopica: the skill that uses a wiki instance and the atrium retrieval server.",
+  "owner": { "name": "Syntopica", "url": "https://github.com/syntopica" },
+  "plugins": [
+    {
+      "name": "syntopica",
+      "source": ".",
+      "description": "Retrieve established context, write and maintain wiki pages, ingest captures, check instance health.",
+      "version": "0.1.0",
+      "license": "MIT",
+      "keywords": ["wiki", "knowledge-base", "memory", "mcp"]
+    }
+  ]
+}

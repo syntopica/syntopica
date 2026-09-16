@@ -1,19 +1,9 @@
 """The component menu: what each one needs and which checkouts it brings."""
 
-from __future__ import annotations
-
 from collections.abc import Mapping
-from dataclasses import dataclass
 from types import MappingProxyType
 
-
-@dataclass(frozen=True)
-class Component:
-    """One installable component."""
-
-    requires: tuple[str, ...]
-    engines: tuple[str, ...]
-
+from syntopica.component import Component
 
 COMPONENTS: Mapping[str, Component] = MappingProxyType(
     {

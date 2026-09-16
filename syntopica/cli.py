@@ -5,7 +5,7 @@ from __future__ import annotations
 import argparse
 import sys
 
-from syntopica.version import package_version
+from syntopica.package_version import package_version
 
 
 def main(argv: list[str] | None = None) -> int:
