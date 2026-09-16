@@ -6,7 +6,10 @@ context. The engines are public; your data stays in a directory you control.
 
 - **brain** builds the index and link graph, lints pages, and diagnoses the instance.
 - **clips** captures web pages and newsletters and turns them into cited pages.
-- **atrium** serves retrieval over your own agent conversation history, over MCP.
+- **atrium** serves retrieval over your own agent conversation history **and over
+  the wiki's pages**, over MCP. It is also where semantic search comes from: brain
+  holds no embeddings, so a brain-only instance searches by words (`brain find`)
+  and will not find a paraphrase. `brain doctor` says which of the two you have.
 
 ## Set it up with your agent
 
@@ -22,8 +25,9 @@ record on your existing subscription: no second account, no batch job.
 
 ## The hub CLI
 
-Start with brain alone: a local Markdown wiki, an index and an offline link
-graph, in one directory you own. You need Git, uv and Python 3.12 or newer.
+Start with brain alone: a local Markdown wiki, an index, an offline link graph
+and keyword search over the pages, in one directory you own -- semantic search
+arrives with atrium, not before. You need Git, uv and Python 3.12 or newer.
 Installing the hub does not clone the engines; `init` expects them under
 `engines/` and tells you which one is missing.
 
