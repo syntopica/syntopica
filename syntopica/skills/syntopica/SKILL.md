@@ -71,10 +71,10 @@ absolute path with `--data`, so the command works on the intended instance:
 ```
 
 A real run publishes by fast-forward, so it needs both the wiki and the clip
-archive on `main` with an `origin/main` they equal. A fresh instance has
-neither and `clips doctor` says so on its `ingest:` line; the dry run works
-without them. Do not create or push a remote to satisfy it - that destination
-is the owner's decision.
+archive on `main` with an `origin/main` they equal. A fresh instance has neither
+and `clips doctor` says so on its `ingest:` line; the dry run works without
+them. Do not create or push a remote to satisfy it - that destination is the
+owner's decision.
 
 Two mechanics that cost a re-run when forgotten: every file must be written
 before the synthesizer prompt is answered, because validation between the two
