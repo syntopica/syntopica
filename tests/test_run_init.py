@@ -14,8 +14,11 @@ def test_brain_only_writes_a_valid_instance(
     assert run_init("brain", str(tmp_path), "engines") == 0
     document = json.loads((tmp_path / "syntopica.config.json").read_text())
     assert document["engines"] == {"brain": {"path": "engines/brain", "apiVersion": 1}}
-    for directory in ("pages", "sources", ".ingest", "clips", ".config"):
+    for directory in ("pages", "sources", ".ingest", ".config"):
         assert (tmp_path / directory).is_dir(), directory
+    # The clip archive belongs to the clips component. Creating it anyway left
+    # every brain-only wiki with an empty `clips/` its owner could not explain.
+    assert not (tmp_path / "clips").exists()
     assert (tmp_path / ".config" / "project-aliases.json").read_text() == "{}\n"
     assert (tmp_path / "index.md").read_text() == "# Index\n"
     assert (tmp_path / ".git").is_dir()
@@ -33,6 +36,12 @@ def test_all_components_need_all_four_checkouts(
     assert "engines/atrium" in err and "engines/agents" in err
     assert "git clone https://github.com/syntopica/atrium.git" in err
     assert not (tmp_path / "syntopica.config.json").exists()
+
+
+def test_clips_gets_its_archive_directory(tmp_path: Path) -> None:
+    make_stub_engines(tmp_path, ("brain", "clips"))
+    assert run_init("brain,clips", str(tmp_path), "engines") == 0
+    assert (tmp_path / "clips").is_dir()
 
 
 def test_existing_configuration_is_never_overwritten(

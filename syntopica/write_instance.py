@@ -5,9 +5,12 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import cast
 
-# The brain engine applies schema defaults for clips and newsletter paths even
-# when those sections are absent, and its doctor requires the defaults to
-# exist. Creating them for every component set keeps a brain-only doctor green.
+# The brain engine applies schema defaults for the newsletter paths even when
+# that section is absent, and its doctor requires the defaults to exist.
+# Creating them for every component set keeps a brain-only doctor green. The
+# clip archive is not one of those: since brain stopped requiring it for an
+# instance without the engine, creating it left every brain-only wiki with an
+# empty `clips/` nobody could explain.
 STATE_ENTRIES = ("engines/", "atrium/", "conversations/", "syntopica.local.json")
 CONFIG_FILES = {
     "newsletter-accepted.json": "[]\n",
@@ -24,9 +27,11 @@ def write_instance(data: Path, document: Mapping[str, object]) -> None:
         *cast(list[str], brain["pages"]),
         cast(str, brain["sources"]),
         cast(str, brain["ledger"]),
-        "clips",
         ".config",
     ]
+    clips = document.get("clips")
+    if isinstance(clips, Mapping):
+        directories.append(cast(str, clips["archive"]))
     for directory in directories:
         (data / directory).mkdir(parents=True, exist_ok=True)
     for name, text in CONFIG_FILES.items():

@@ -94,10 +94,3 @@ syntopica doctor                        # every installed engine's own doctor
 Say which pages answered the question, which pages changed, and which checks ran
 with their results. An answer the wiki does not support is marked as
 unsupported, not asserted.
-
-## Rules Index
-<!-- GENERATED-RULES-INDEX:START -->
-- @rules/core/agent-discipline.mdc
-- @rules/core/security-baseline.mdc
-- @rules/core/text-hygiene.mdc
-<!-- GENERATED-RULES-INDEX:END -->

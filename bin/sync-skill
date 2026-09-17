@@ -12,5 +12,14 @@ from="$source/dist/skills-portable/core/syntopica/SKILL.md"
 [ -f "$from" ] || { echo "no compiled skill at $from; run pnpm run skills:compile there" >&2; exit 1; }
 cd "$(dirname "$0")/.."
 mkdir -p syntopica/skills/syntopica
-cp "$from" syntopica/skills/syntopica/SKILL.md
+# The compiler appends a rules index pointing at `@rules/core/*.mdc`, files
+# that exist only in the authoring checkout. A stranger following them finds
+# nothing, and no other agent runtime acquires a rule loader by reading them,
+# so the block is dropped from the distributed copy.
+body=$(awk '
+  /^## Rules Index$/ { dropping = 1 }
+  /<!-- GENERATED-RULES-INDEX:END -->/ { dropping = 0; next }
+  dropping != 1 { print }
+' "$from")
+printf '%s\n' "$body" > syntopica/skills/syntopica/SKILL.md
 echo "vendored $from"

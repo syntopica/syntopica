@@ -2,6 +2,25 @@
 
 Tested 2026-09-16 from fresh HTTPS GitHub clones. **Neither published onboarding path reaches its promised completion literally with `brain,clips,atrium`.** The README stops at `init`; the agent procedure stops at Step 5. Bypassing that stop produces an index, but the documented link syntax produces a disconnected graph. A corrected, brain-only quickstart was executed successfully; its exact text is below.
 
+## Disposition, 2026-09-17
+
+Every finding below has been answered; the report itself is left as it was
+written, because a record that gets edited to match the fix stops being
+evidence. Where the work landed:
+
+| Finding | Where it was answered |
+| --- | --- |
+| F1, F2, F9 | hub `AGENTS.md`: engine preparation, the export-and-ingest chain before the doctor, and what `syntopica client` writes outside the wiki |
+| F3, F10, F11, F13 | brain: bare `[[page]]` resolution, the frontmatter and filename conventions lint promised, executables named per configured component, and an index footer only where an inbox exists |
+| F4, F5 | clips: `clips.sh` keeps the caller's instance, and the dry run no longer asks for a publication remote |
+| F6, F7 | clips: the configured runner is the one that executes, an unconfigured stage runs no model, and a pinned grader cannot be the tier that wrote the batch |
+| F8 | hub: `client` reads the registration back and refuses one pointing at another instance |
+| F12, F14 | engine READMEs, the vendored skill, `syntopica/test-data` and the `init` claim in `AGENTS.md` |
+
+What stays open is in `TODO.md`: model identifiers are constants inside each
+transport, and whether they belong in an instance's configuration is a design
+question rather than a repair.
+
 ## Scope, evidence, and limitations
 
 The hub README and AGENTS were read fully before inspecting implementation. The selected components were `brain,clips,atrium`. The data directory example `~/wiki` was replaced with `agent-path/` under this audit directory. No private wiki was read. No client-registration command, model request, conversation export of real data, deployment, or remote Git write was performed. The sole data-repository commit contains synthetic pages and stays local. Public engine source trees remain unchanged.

@@ -98,8 +98,10 @@ syntopica init --with brain            # or: brain,clips  /  brain,atrium  /  br
 
 Result: `wrote .../syntopica.config.json for ...` and `next: syntopica doctor`.
 `init` validates the file against the engine's schema before writing, creates
-the page and state directories, and makes the directory a Git repository if
-it was not one.
+the page and support directories - pages, sources, the ledger, `.config` and,
+with clips, the archive - and makes the directory a Git repository if it was
+not one. The Atrium and conversation directories are created later, by the
+operations that own them.
 
 ### 5. First page
 
