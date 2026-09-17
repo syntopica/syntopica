@@ -9,13 +9,18 @@ from syntopica.client_skill_directory import client_skill_directory
 from syntopica.engine_doctor_command import engine_doctor_command
 from syntopica.engines_for_components import engines_for_components
 from syntopica.find_data_directory import find_data_directory
-from syntopica.mcp_server_listed import mcp_server_listed
+from syntopica.mcp_server_status import mcp_server_status
 from syntopica.read_config_document import read_config_document
 from syntopica.run_client_command import run_client_command
 from syntopica.run_engine_doctor import run_engine_doctor
 from syntopica.selected_components import selected_components
 
 CLIENTS = ("claude", "codex")
+STATUS_REPORT = {
+    "matches": "registered for this instance",
+    "conflict": "registered for another instance or checkout",
+    "absent": "not registered",
+}
 
 
 def run_doctor(data: str | None) -> int:
@@ -51,6 +56,7 @@ def run_doctor(data: str | None) -> int:
         installed = client_skill_directory(client, home).is_dir()
         print(f"INFO {client} skill: {'installed' if installed else 'not installed'}")
         if "atrium" in components:
-            registered = mcp_server_listed(client, run_client_command)
-            print(f"INFO {client} mcp atrium: {'registered' if registered else 'not registered'}")
+            checkout = (root / engines["atrium"]["path"]).resolve()
+            status = mcp_server_status(client, run_client_command, root, checkout)
+            print(f"INFO {client} mcp atrium: {STATUS_REPORT[status]}")
     return int(any(not passed for passed, _ in summary))

@@ -122,6 +122,12 @@ for the client step: `/plugin marketplace add syntopica/syntopica` then
 resolves it by walking up from the working directory or from `SYNTOPICA_DATA`,
 exactly as the engines already do; the contract says so.
 
+**Reversed on 2026-09-17.** Walking up from the working directory answers from
+nothing in every project that is not the wiki, which is the ordinary case for a
+session, and a plugin server cannot carry the absolute path that would fix it.
+The plugin now ships the skill alone and the contract points the server at
+`syntopica client claude`.
+
 `README.md` for people is short: what Syntopica is, the three components in a
 sentence each, and the instruction "paste this to your agent" with the
 repository URL. It links to `AGENTS.md` rather than repeating it.

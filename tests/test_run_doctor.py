@@ -25,7 +25,10 @@ def _instance(tmp_path: Path, document: dict[str, object]) -> Path:
 @pytest.fixture
 def quiet_clients(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("HOME", str(tmp_path / "home"))
-    monkeypatch.setattr("syntopica.run_doctor.mcp_server_listed", lambda client, run: False)
+    monkeypatch.setattr(
+        "syntopica.run_doctor.mcp_server_status",
+        lambda client, run, data, checkout: "absent",
+    )
 
 
 def test_all_selected_engines_pass(
@@ -86,7 +89,8 @@ def test_atrium_reports_the_agents_checkout_and_mcp(
     monkeypatch.setenv("PATH", f"{fake_bin}:{tmp_path}")
     monkeypatch.setenv("HOME", str(tmp_path / "home"))
     monkeypatch.setattr(
-        "syntopica.run_doctor.mcp_server_listed", lambda client, run: client == "codex"
+        "syntopica.run_doctor.mcp_server_status",
+        lambda client, run, data, checkout: "matches" if client == "codex" else "absent",
     )
     data = _instance(
         tmp_path,
@@ -104,7 +108,7 @@ def test_atrium_reports_the_agents_checkout_and_mcp(
     assert run_doctor(str(data)) == 0
     out = capsys.readouterr().out
     assert "PASS atrium doctor" in out and "PASS agents checkout present" in out
-    assert "INFO codex mcp atrium: registered" in out
+    assert "INFO codex mcp atrium: registered for this instance" in out
     assert "INFO claude mcp atrium: not registered" in out
 
 
