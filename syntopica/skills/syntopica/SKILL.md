@@ -61,13 +61,20 @@ links to is an orphan the lint reports. After writing, run the index:
 
 ## Ingest
 
-With the clips engine present:
+With the clips engine present. Run these from the data directory, or pass its
+absolute path with `--data`, so the command works on the intended instance:
 
 ```bash
-<engines.clips.path>/clips.sh status              # what is captured, where each clip stands
-<engines.clips.path>/clips.sh ingest --dry-run    # route only, costs nothing
-<engines.clips.path>/clips.sh ingest              # the real run
+<engines.clips.path>/clips.sh --data "$PWD" status            # what is captured, where each clip stands
+<engines.clips.path>/clips.sh --data "$PWD" ingest --dry-run  # route only, writes and fetches nothing
+<engines.clips.path>/clips.sh --data "$PWD" ingest            # the real run
 ```
+
+A real run publishes by fast-forward, so it needs both the wiki and the clip
+archive on `main` with an `origin/main` they equal. A fresh instance has
+neither and `clips doctor` says so on its `ingest:` line; the dry run works
+without them. Do not create or push a remote to satisfy it - that destination
+is the owner's decision.
 
 Two mechanics that cost a re-run when forgotten: every file must be written
 before the synthesizer prompt is answered, because validation between the two

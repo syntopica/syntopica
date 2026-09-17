@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "atrium": {
-      "command": "atrium-mcp",
-      "args": []
-    }
-  }
-}

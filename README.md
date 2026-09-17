@@ -61,19 +61,26 @@ Back to [[pages/start]].
 PAGE
 engines/brain/bin/brain index        # index.md from the pages
 engines/brain/bin/brain graph        # graph.html, orphans, dangling links
+engines/brain/bin/brain lint         # frontmatter, filenames, summaries, links
 syntopica doctor                     # every selected engine's doctor
 ```
 
-Expect `index.md: 2 pages`, `pages 2  links 2  orphans 0` and `PASS brain
-doctor`. Links carry the page directory, as in `[[pages/decisions]]`.
+Expect `index.md: 2 pages`, `pages 2  links 2  orphans 0`, `lint: 2 pages, 0
+issues` and `PASS brain doctor`. Links carry the page directory, as in
+`[[pages/decisions]]`.
 
 Add clips and atrium afterwards by cloning them under `engines/` and following
 `AGENTS.md`; each needs more than a clone (clips a publishable Git remote,
 atrium an exported conversation archive), and `syntopica doctor` says so.
-`syntopica client claude` (or `codex`) is optional: it installs the skill under
-`~/.claude/skills/syntopica` (or `~/.codex/skills/syntopica`) and registers the
-atrium MCP server in that client's user configuration with absolute paths to
-this wiki.
+`syntopica client claude` (or `codex`) is optional and writes outside the wiki:
+it installs the skill under `~/.claude/skills/syntopica` (or
+`~/.codex/skills/syntopica`) and registers the atrium MCP server in that
+client's user configuration, with absolute paths to this wiki and its atrium
+checkout, so the server is offered in every project. A skill directory the hub
+did not write is refused; one it did write is replaced in full, local edits
+included. The success line is printed only after the hub reads the registration
+back, and an atrium server already registered for another instance stops the
+command instead of being overwritten.
 
 ## Repositories
 
