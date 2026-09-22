@@ -23,11 +23,11 @@ question rather than a repair.
 
 ## Scope, evidence, and limitations
 
-The hub README and AGENTS were read fully before inspecting implementation. The selected components were `brain,clips,atrium`. The data directory example `~/wiki` was replaced with `agent-path/` under this audit directory. No private wiki was read. No client-registration command, model request, conversation export of real data, deployment, or remote Git write was performed. The sole data-repository commit contains synthetic pages and stays local. Public engine source trees remain unchanged.
+The run's evidence bundle - the command timeline, the raw records, the fixtures and the link-check output - stayed in the audit directory and is not published with this report; the names in backticks below refer to it. The hub README and AGENTS were read fully before inspecting implementation. The selected components were `brain,clips,atrium`. The data directory example `~/wiki` was replaced with `agent-path/` under this audit directory. No private wiki was read. No client-registration command, model request, conversation export of real data, deployment, or remote Git write was performed. The sole data-repository commit contains synthetic pages and stays local. Public engine source trees remain unchanged.
 
 The environment actually resolved `uv 0.12.15`, Python `3.14.7`, Node `v26.8.2`, pnpm `12.4.2`, and Git `2.55.0`; uv selected an already-installed Python `3.14.3`. The agents checkout selected pnpm `11.15.0`. These are measured results, not certification of the advertised minimum versions or Node 24. Node 24 was not at the usual Homebrew `node@24` path.
 
-**Containment exception:** the first two `pnpm install` runs ignored `npm_config_store_dir` and reused the existing store under `the user's pnpm store`. Their output reports zero downloads, but absence of metadata writes outside this directory cannot be certified. This violates the intended containment assurance. No outside cleanup was attempted. All subsequent recorded commands ran through an OS sandbox denying filesystem writes outside this directory. `HOME` was never reassigned. uv tool directories, uv caches, temporary files, XDG paths, Python bytecode and later package-store writes were confined here. See [containment note](evidence/containment-note.md).
+**Containment exception:** the first two `pnpm install` runs ignored `npm_config_store_dir` and reused the existing store under `the user's pnpm store`. Their output reports zero downloads, but absence of metadata writes outside this directory cannot be certified. This violates the intended containment assurance. No outside cleanup was attempted. All subsequent recorded commands ran through an OS sandbox denying filesystem writes outside this directory. `HOME` was never reassigned. uv tool directories, uv caches, temporary files, XDG paths, Python bytecode and later package-store writes were confined here. See `containment note`.
 
 The real `claude` and `codex` binaries were shadowed with exit-127 shims during doctor runs, because `mcp list` can interact with existing servers. Consequently, their `INFO ... mcp` lines are not real registration tests. The pre-existing `INFO claude skill: installed` line is also not evidence that this setup installed a skill. Client findings below are explicitly based on source inspection and official documentation.
 
@@ -40,7 +40,7 @@ The real `claude` and `codex` binaries were shadowed with exit-127 shims during 
 | syntopica/agents | `cac49b1de4feb4dcadd0f7cd7cf64676762e65b9` |
 | syntopica/test-data | `6bb75d7764dbd6643579e7649bc788787b2fcfb3` |
 
-The [complete timeline](evidence/timeline.md) records every instrumented command, its exact working directory, start time, duration, exit code, and a link to complete combined stdout/stderr. The underlying records are [commands.jsonl](evidence/commands.jsonl). Investigation commands that guessed nonexistent filenames remain in the log; those errors are not treated as product defects. Fixture creation is preserved in the local scripts and files.
+The `complete timeline` records every instrumented command, its exact working directory, start time, duration, exit code, and a link to complete combined stdout/stderr. The underlying records are `commands.jsonl`. Investigation commands that guessed nonexistent filenames remain in the log; those errors are not treated as product defects. Fixture creation is preserved in the local scripts and files.
 
 ## 1. Timeline
 
@@ -154,7 +154,7 @@ This is an honest interim route to a working wiki, not a completed Atrium setup.
 
 **Exact text:** `` `[[page-name]]` links a page by its filename without the extension. ``
 
-**Observed:** the three pages contain six such links, yet graph says `links 0  orphans 3`; lint says `0 issues`. The scanner skips every target without `/`. Replacing only the targets with `[[pages/name]]` produces six links and zero orphans. Originals are preserved in [pages-documented-links](evidence/pages-documented-links/) and [graph-documented-links.html](evidence/graph-documented-links.html).
+**Observed:** the three pages contain six such links, yet graph says `links 0  orphans 3`; lint says `0 issues`. The scanner skips every target without `/`. Replacing only the targets with `[[pages/name]]` produces six links and zero orphans. Originals are preserved in `pages-documented-links` and `graph-documented-links.html`.
 
 **Exact replacement for the link-format sentence:**
 
@@ -479,14 +479,14 @@ If you fix these **three things** before tonight—replace the incomplete README
 | Doctor is just diagnosis | This run auto-installed Clips dependencies and created Atrium's venv. |
 | Everything useful requires full onboarding | Brain produces an index/HTML locally, and Atrium notes-only lexical retrieval works without a conversation archive. Neither requires a model request for the tested commands. |
 
-Public repo links for brain, clips, atrium, agents, test-data, clipper and capture resolved; the Clips sandbox-boundary document and Brain schema/eval paths exist. There is **no confirmed dead repository link** in the tested main onboarding documents. The failures are missing procedures, runtime assumptions and incompatible claims, rather than unavailable repositories. The public [link-check results](evidence/public-links.json) retain the one repeated-request timeout. No private instance was inspected to fill the gaps.
+Public repo links for brain, clips, atrium, agents, test-data, clipper and capture resolved; the Clips sandbox-boundary document and Brain schema/eval paths exist. There is **no confirmed dead repository link** in the tested main onboarding documents. The failures are missing procedures, runtime assumptions and incompatible claims, rather than unavailable repositories. The public `link-check results` retain the one repeated-request timeout. No private instance was inspected to fill the gaps.
 
 ## Deliverables and verification
 
 - [Working three-page index](agent-path/index.md) and [connected graph](agent-path/graph.html).
 - [Tested replacement demo index](demo-path/wiki/index.md) and [graph](demo-path/wiki/graph.html).
-- [Original disconnected graph](evidence/graph-documented-links.html), malformed-page fixture under `lint-probe/`, and safe [runner probe](runner_probe.mjs).
-- [Complete command timeline](evidence/timeline.md), [raw command records](evidence/commands.jsonl), and [public revision manifest](evidence/revisions.json).
+- `Original disconnected graph`, malformed-page fixture under `lint-probe/`, and safe [runner probe](runner_probe.mjs).
+- `Complete command timeline`, `raw command records`, and `public revision manifest`.
 
 Verify the report's retained evidence and generated graph/index contents from this directory:
 
