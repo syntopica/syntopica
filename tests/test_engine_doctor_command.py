@@ -19,6 +19,6 @@ def test_each_engine_runs_from_its_checkout() -> None:
     )
 
 
-def test_agents_has_no_doctor() -> None:
+def test_scribe_has_no_doctor() -> None:
     with pytest.raises(KeyError):
-        engine_doctor_command("agents", Path("/x"))
+        engine_doctor_command("scribe", Path("/x"))

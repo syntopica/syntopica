@@ -33,7 +33,7 @@ def test_all_components_need_all_four_checkouts(
     make_stub_engines(tmp_path, ("brain", "clips"))
     assert run_init("brain,clips,atrium", str(tmp_path), "engines") == 1
     err = capsys.readouterr().err
-    assert "engines/atrium" in err and "engines/agents" in err
+    assert "engines/atrium" in err and "engines/scribe" in err
     assert "git clone https://github.com/syntopica/atrium.git" in err
     assert not (tmp_path / "syntopica.config.json").exists()
 

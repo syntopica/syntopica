@@ -74,13 +74,13 @@ def test_missing_checkout_is_named(
     assert "FAIL brain checkout missing" in capsys.readouterr().out
 
 
-def test_atrium_reports_the_agents_checkout_and_mcp(
+def test_atrium_reports_the_scribe_checkout_and_mcp(
     tmp_path: Path, capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch
 ) -> None:
     engines = tmp_path / "engines"
     _fake_engine(engines, "brain", "bin/brain", "echo PASS\n")
     _fake_engine(engines, "atrium", "unused", "")
-    (engines / "agents" / ".git").mkdir(parents=True)
+    (engines / "scribe" / ".git").mkdir(parents=True)
     fake_bin = tmp_path / "bin"
     fake_bin.mkdir()
     uv = fake_bin / "uv"
@@ -101,13 +101,13 @@ def test_atrium_reports_the_agents_checkout_and_mcp(
             "engines": {
                 "brain": {"path": "../engines/brain"},
                 "atrium": {"path": "../engines/atrium"},
-                "agents": {"path": "../engines/agents"},
+                "scribe": {"path": "../engines/scribe"},
             },
         },
     )
     assert run_doctor(str(data)) == 0
     out = capsys.readouterr().out
-    assert "PASS atrium doctor" in out and "PASS agents checkout present" in out
+    assert "PASS atrium doctor" in out and "PASS scribe checkout present" in out
     assert "INFO codex mcp atrium: registered for this instance" in out
     assert "INFO claude mcp atrium: not registered" in out
 

@@ -136,8 +136,8 @@ jobs:
           (cd engines/brain && uv sync)
           git clone --depth 1 https://github.com/syntopica/atrium.git engines/atrium
           (cd engines/atrium && uv sync --extra mcp)
-          git clone --depth 1 https://github.com/syntopica/agents.git engines/agents
-          (cd engines/agents && pnpm install --frozen-lockfile)
+          git clone --depth 1 https://github.com/syntopica/scribe.git engines/scribe
+          (cd engines/scribe && pnpm install --frozen-lockfile)
           syntopica init --with brain,atrium
           mkdir -p "$RUNNER_TEMP/fixture-home/.claude/projects/fixture"
           cat > "$RUNNER_TEMP/fixture-home/.claude/projects/fixture/s1.jsonl" <<'JSONL'
@@ -145,7 +145,7 @@ jobs:
           {"type":"assistant","sessionId":"fixture-1","timestamp":"2026-09-17T08:01:00Z","message":{"role":"assistant","content":"brain index rewrites index.md from each page summary."}}
           JSONL
           data="$PWD"
-          (cd engines/agents && pnpm conversations:export \
+          (cd engines/scribe && pnpm conversations:export \
             --output "$data/conversations/archive.jsonl" \
             --home "$RUNNER_TEMP/fixture-home" --source claude-code)
           uv run --project engines/atrium atrium ingest "$data/conversations/archive.jsonl"

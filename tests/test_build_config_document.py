@@ -33,7 +33,7 @@ def test_atrium_adds_state_sections_and_two_checkouts() -> None:
     document = build_config_document(("brain", "atrium"), "engines")
     assert document["atrium"] == {"path": "atrium"}
     assert document["conversations"] == {"path": "conversations"}
-    assert set(cast(dict[str, object], document["engines"])) == {"brain", "atrium", "agents"}
+    assert set(cast(dict[str, object], document["engines"])) == {"brain", "atrium", "scribe"}
 
 
 def test_engines_for_components_is_ordered() -> None:
@@ -41,5 +41,5 @@ def test_engines_for_components_is_ordered() -> None:
         "brain",
         "clips",
         "atrium",
-        "agents",
+        "scribe",
     )

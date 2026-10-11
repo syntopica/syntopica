@@ -47,7 +47,7 @@ def _atrium_instance(tmp_path: Path) -> Path:
             "engines": {
                 "brain": {"path": "engines/brain"},
                 "atrium": {"path": "engines/atrium"},
-                "agents": {"path": "engines/agents"},
+                "scribe": {"path": "engines/scribe"},
             },
         },
     )
@@ -65,7 +65,7 @@ def test_atrium_registers_once(
             "engines": {
                 "brain": {"path": "engines/brain"},
                 "atrium": {"path": "engines/atrium"},
-                "agents": {"path": "engines/agents"},
+                "scribe": {"path": "engines/scribe"},
             },
         },
     )

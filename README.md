@@ -87,6 +87,7 @@ command instead of being overwritten.
 [brain](https://github.com/syntopica/brain) ·
 [clips](https://github.com/syntopica/clips) ·
 [atrium](https://github.com/syntopica/atrium) ·
+[scribe](https://github.com/syntopica/scribe) ·
 [agents](https://github.com/syntopica/agents) ·
 [test-data](https://github.com/syntopica/test-data)
 

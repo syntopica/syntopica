@@ -78,8 +78,8 @@ With `atrium`:
 ```bash
 git clone https://github.com/syntopica/atrium.git engines/atrium
 (cd engines/atrium && uv sync --extra mcp)
-git clone https://github.com/syntopica/agents.git engines/agents
-(cd engines/agents && pnpm install)
+git clone https://github.com/syntopica/scribe.git engines/scribe
+(cd engines/scribe && pnpm install)
 uv tool install "git+https://github.com/syntopica/atrium#egg=atrium[mcp]"
 ```
 
@@ -118,12 +118,12 @@ part that has to work; everything below is optional wiring.
 
 ### 6. Fill the conversation index, with `atrium`
 
-Atrium indexes a canonical archive that the `agents` engine exports; it never
+Atrium indexes a canonical archive that the `scribe` engine exports; it never
 reads a provider's transcripts itself. Export, then index:
 
 ```bash
 data="$PWD"
-(cd engines/agents && pnpm conversations:export --output "$data/conversations/archive.jsonl" --source claude-code)
+(cd engines/scribe && pnpm conversations:export --output "$data/conversations/archive.jsonl" --source claude-code)
 uv run --project engines/atrium atrium ingest "$data/conversations/archive.jsonl"
 ```
 

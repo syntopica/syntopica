@@ -39,8 +39,8 @@ def run_doctor(data: str | None) -> int:
         if not (checkout / ".git").exists():
             summary.append((False, f"{name} checkout missing ({checkout})"))
             continue
-        if name == "agents":
-            summary.append((True, "agents checkout present"))
+        if name == "scribe":
+            summary.append((True, "scribe checkout present"))
             continue
         print(f"== {name} ==")
         passed, output = run_engine_doctor(

@@ -9,9 +9,9 @@ COMPONENTS: Mapping[str, Component] = MappingProxyType(
     {
         "brain": Component(requires=(), engines=("brain",)),
         "clips": Component(requires=("brain",), engines=("clips",)),
-        # atrium indexes the archive that the agents transport exports.
-        "atrium": Component(requires=("brain",), engines=("atrium", "agents")),
+        # atrium indexes the archive that scribe exports.
+        "atrium": Component(requires=("brain",), engines=("atrium", "scribe")),
     }
 )
 
-ENGINE_ORDER: tuple[str, ...] = ("brain", "clips", "atrium", "agents")
+ENGINE_ORDER: tuple[str, ...] = ("brain", "clips", "atrium", "scribe")
