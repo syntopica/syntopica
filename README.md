@@ -82,12 +82,21 @@ included. The success line is printed only after the hub reads the registration
 back, and an atrium server already registered for another instance stops the
 command instead of being overwritten.
 
+## tadu: an optional backlog tool for any repository
+
+[tadu](https://github.com/syntopica/tadu) is a standalone checker and set of
+skills for a per-repository agent backlog (`TODO.md`, `TODO_LOG.md`). It is not
+a hub component and needs no wiki instance. Install the checker with
+`uv tool install git+https://github.com/syntopica/tadu`; its skills come with
+the `tadu` plugin from this marketplace.
+
 ## Repositories
 
 [brain](https://github.com/syntopica/brain) ·
 [clips](https://github.com/syntopica/clips) ·
 [atrium](https://github.com/syntopica/atrium) ·
 [scribe](https://github.com/syntopica/scribe) ·
+[tadu](https://github.com/syntopica/tadu) ·
 [agents](https://github.com/syntopica/agents) ·
 [test-data](https://github.com/syntopica/test-data)
 

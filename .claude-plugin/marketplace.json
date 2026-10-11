@@ -10,6 +10,13 @@
       "version": "0.1.0",
       "license": "MIT",
       "keywords": ["wiki", "knowledge-base", "memory", "mcp"]
+    },
+    {
+      "name": "tadu",
+      "source": { "source": "github", "repo": "syntopica/tadu" },
+      "description": "Keep a repository backlog agents work through: create it from history, execute it, check it.",
+      "license": "MIT",
+      "keywords": ["todo", "backlog", "agents"]
     }
   ]
 }
