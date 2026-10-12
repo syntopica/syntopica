@@ -82,6 +82,22 @@ included. The success line is printed only after the hub reads the registration
 back, and an atrium server already registered for another instance stops the
 command instead of being overwritten.
 
+## Claude Code plugin
+
+The skill also ships as a Claude Code plugin from this repository's
+marketplace. On Claude Code 2.1.275 or later:
+
+```text
+/plugin install syntopica --marketplace syntopica/syntopica
+```
+
+On earlier versions, add the marketplace first:
+
+```text
+/plugin marketplace add syntopica/syntopica
+/plugin install syntopica@syntopica
+```
+
 ## tadu: an optional backlog tool for any repository
 
 [tadu](https://github.com/syntopica/tadu) is a standalone checker and set of
