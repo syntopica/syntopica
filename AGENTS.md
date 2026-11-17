@@ -14,11 +14,11 @@ anywhere by this setup.
 
 ## Components
 
-| component | what the person gets | needs |
-| --- | --- | --- |
-| `brain` | the wiki engine: index, link graph, lint, doctor | git, uv, Python 3.12+ |
-| `clips` | capture web pages and newsletters and turn them into cited wiki pages | `brain`; Node 22+, pnpm; a model transport the person configures later |
-| `atrium` | retrieval over the person's own agent conversation history, served to you over MCP | Node 22+, pnpm (for the conversation export) |
+| component | what the person gets                                                               | needs                                                                  |
+| --------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `brain`   | the wiki engine: index, link graph, lint, doctor                                   | git, uv, Python 3.12+                                                  |
+| `clips`   | capture web pages and newsletters and turn them into cited wiki pages              | `brain`; Node 22+, pnpm; a model transport the person configures later |
+| `atrium`  | retrieval over the person's own agent conversation history, served to you over MCP | Node 22+, pnpm (for the conversation export)                           |
 
 If the person did not say which components they want, ask once. The default
 is `brain` alone.
@@ -195,8 +195,16 @@ to `hooks.Stop` in `~/.claude/settings.json` (paths absolute; `SYNTOPICA_DATA`
 is the data directory from step 2):
 
 ```json
-{"matcher": "*", "hooks": [{"type": "command", "timeout": 30,
-  "command": "SYNTOPICA_DATA=/abs/path/to/data sh /abs/path/to/engines/atrium/hooks/claude-code/stop-record-episode.sh"}]}
+{
+  "matcher": "*",
+  "hooks": [
+    {
+      "type": "command",
+      "timeout": 30,
+      "command": "SYNTOPICA_DATA=/abs/path/to/data sh /abs/path/to/engines/atrium/hooks/claude-code/stop-record-episode.sh"
+    }
+  ]
+}
 ```
 
 Result: after a long turn Claude Code refuses to stop once and asks the model
@@ -211,7 +219,7 @@ to run `atrium record-session --checkpoint <id>`; the record lands in
 - The `syntopica` skill you installed tells a session how to query, write,
   ingest and maintain the wiki.
 
-<!-- tadu:rule v4 -->
+<!-- tadu:rule v5 -->
 
 ## Continuous TODO, Work Log, and History Coverage
 
@@ -255,6 +263,8 @@ conversations more than once.
   (`--resolution`, or `--duplicate-of ID`). Close reports the tasks that no
   longer wait on it; decide for each whether it moves to pending. Every command
   is a dry run until `--write`.
+- In anything a person reads, such as a summary, a report or a question, name a
+  task by its title, never by its ID; IDs stay in commands and tool calls.
 - Before reviewing past conversations, consult the history index and skip
   unchanged records already marked `complete` or `irrelevant`. Update a record
   only after its findings are reconciled; interrupted work stays `partial`.
