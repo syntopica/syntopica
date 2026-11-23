@@ -9,7 +9,8 @@
   "created": "2026-11-23",
   "notes": [
     "Found 2026-11-23 installing a fresh instance on a second macOS machine (Darwin 27.2, uv 0.11, pnpm 11) following syntopica AGENTS.md.",
-    "engine_doctor_command runs <checkout>/bin/brain doctor directly, so its shebang picks /usr/bin/python3 3.9 and crashes (TypeError on PEP 604 annotations) although 'brain doctor' via the venv passes all 7 checks. Same root cause as the brain launcher task; the hub should invoke the engine through its venv or 'uv run --project'."
+    "engine_doctor_command runs <checkout>/bin/brain doctor directly, so its shebang picks /usr/bin/python3 3.9 and crashes (TypeError on PEP 604 annotations) although 'brain doctor' via the venv passes all 7 checks. Same root cause as the brain launcher task; the hub should invoke the engine through its venv or 'uv run --project'.",
+    "History was rewritten on 2026-11-23 to correct an author: brain defbdb7 is now 584ee6b, atrium 868c6db is now 8defdb8 and 5caa18c is now f94d189."
   ],
   "done_when": [
     "syntopica doctor shows PASS brain doctor on a fresh macOS install with no python3 >= 3.12 first on PATH"

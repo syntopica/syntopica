@@ -9,7 +9,8 @@
   "created": "2026-11-23",
   "notes": [
     "Found 2026-11-23 installing a fresh instance on a second macOS machine (Darwin 27.2, uv 0.11, pnpm 11) following syntopica AGENTS.md.",
-    "'engines/brain/bin/brain index' and 'bin/brain lint' crash on Python 3.9. Until the launcher is fixed, the doc should use 'uv run --project engines/brain ...' or the venv interpreter, and list python3>=3.12 on PATH as a real prerequisite."
+    "'engines/brain/bin/brain index' and 'bin/brain lint' crash on Python 3.9. Until the launcher is fixed, the doc should use 'uv run --project engines/brain ...' or the venv interpreter, and list python3>=3.12 on PATH as a real prerequisite.",
+    "History was rewritten on 2026-11-23 to correct an author: brain defbdb7 is now 584ee6b, atrium 868c6db is now 8defdb8 and 5caa18c is now f94d189."
   ],
   "done_when": [
     "Following AGENTS.md verbatim on a stock Mac reaches 'lint: 0 issues' with no workaround"

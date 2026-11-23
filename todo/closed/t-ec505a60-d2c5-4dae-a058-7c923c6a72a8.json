@@ -10,7 +10,8 @@
   "notes": [
     "Found 2026-11-23 installing a fresh instance on a second macOS machine (Darwin 27.2, uv 0.11, pnpm 11) following syntopica AGENTS.md.",
     "The original install's atrium-refresh, atrium-lock, atrium-synthesis, the SessionEnd refresh hook and the LaunchAgents (refresh hourly, serve-context) live in the owner's private dotfiles. A new user gets an index that never refreshes after step 6. Also: 'pnpm conversations:export' refuses an existing --output, so a naive refresh must write to a temp file with --force and move it.",
-    "AGENTS.md also does not mention the atrium-context plugin, which 'atrium doctor' warns about (prompt_hook) until installed via 'claude plugin marketplace add <atrium checkout>' + 'claude plugin install atrium-context@atrium'."
+    "AGENTS.md also does not mention the atrium-context plugin, which 'atrium doctor' warns about (prompt_hook) until installed via 'claude plugin marketplace add <atrium checkout>' + 'claude plugin install atrium-context@atrium'.",
+    "History was rewritten on 2026-11-23 to correct an author: brain defbdb7 is now 584ee6b, atrium 868c6db is now 8defdb8 and 5caa18c is now f94d189."
   ],
   "done_when": [
     "A 'syntopica schedule' (or documented step) installs refresh + context service + hooks + plugin from public repos, and atrium doctor is all ok on a fresh machine"
