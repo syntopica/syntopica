@@ -2,7 +2,7 @@
   "tadu": 2,
   "id": "t-8eb41cc1-85a7-40b4-9320-73856240fe4d",
   "title": "syntopica doctor reports FAIL for brain on macOS because bin/brain runs under system python3",
-  "state": "pending",
+  "state": "done",
   "category": "general",
   "type": "bug",
   "priority": "high",
@@ -13,5 +13,10 @@
   ],
   "done_when": [
     "syntopica doctor shows PASS brain doctor on a fresh macOS install with no python3 >= 3.12 first on PATH"
+  ],
+  "closed": "2026-11-23",
+  "result": "syntopica doctor reports FAIL for brain on macOS because bin/brain runs under system python3",
+  "evidence": [
+    "Fixed at the root in brain defbdb7 (launcher uses the engine venv). Throwaway instance with PATH python3 3.9.6: syntopica doctor printed 'PASS brain doctor'."
   ]
 }

@@ -2,7 +2,7 @@
   "tadu": 2,
   "id": "t-244d496c-9631-4702-8813-6c6854c33cec",
   "title": "Fix 'syntopica client claude': claude mcp add swallows the server name as an env var",
-  "state": "pending",
+  "state": "done",
   "category": "general",
   "type": "bug",
   "priority": "high",
@@ -14,5 +14,10 @@
   ],
   "done_when": [
     "syntopica client claude registers atrium on current Claude Code and the readback check passes; a test pins the argv order (name before --env)"
+  ],
+  "closed": "2026-11-23",
+  "result": "Fix 'syntopica client claude': claude mcp add swallows the server name as an env var",
+  "evidence": [
+    "mcp_add_command puts the name before --env; tests/test_mcp_add_command.py pins the order. Against Claude Code 2.1.331 with an isolated config dir: 'Added stdio MCP server atrium', readback status 'matches'."
   ]
 }
