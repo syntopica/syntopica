@@ -82,6 +82,10 @@ included. The success line is printed only after the hub reads the registration
 back, and an atrium server already registered for another instance stops the
 command instead of being overwritten.
 
+`syntopica schedule` is optional too, for an instance with atrium on macOS: it
+writes and loads two launchd jobs under `~/Library/LaunchAgents`, an hourly
+refresh of the conversation index and the resident context service.
+
 ## Claude Code plugin
 
 The skill also ships as a Claude Code plugin from this repository's

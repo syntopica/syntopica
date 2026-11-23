@@ -1,12 +1,12 @@
 import subprocess
 from pathlib import Path
 
-from syntopica.mcp_server_status import mcp_server_status
+from syntopica.mcp_server_status import Run, mcp_server_status
 
 REGISTERED = "atrium:\n  Args: run --project /w/engines/atrium atrium-mcp\n  SYNTOPICA_DATA=/w\n"
 
 
-def _run(returncode: int, stdout: str = ""):
+def _run(returncode: int, stdout: str = "") -> Run:
     return lambda argv: subprocess.CompletedProcess(argv, returncode, stdout, "")
 
 

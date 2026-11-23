@@ -1,4 +1,4 @@
-"""Command-line entry point: init, doctor and client."""
+"""Command-line entry point: init, doctor, client and schedule."""
 
 from __future__ import annotations
 
@@ -30,6 +30,11 @@ def main(argv: list[str] | None = None) -> int:
     client.add_argument("name", choices=("claude", "codex"))
     client.add_argument("--data", default=None)
 
+    schedule = commands.add_parser(
+        "schedule", help="install the launchd jobs that refresh atrium and serve its context"
+    )
+    schedule.add_argument("--data", default=None)
+
     args = parser.parse_args(argv)
     # Lazy on purpose: --version and --help never load a command's dependencies.
     if args.command == "init":
@@ -40,6 +45,10 @@ def main(argv: list[str] | None = None) -> int:
         from syntopica.run_doctor import run_doctor
 
         return run_doctor(args.data)
+    if args.command == "schedule":
+        from syntopica.run_schedule import run_schedule
+
+        return run_schedule(args.data)
     from syntopica.run_client import run_client
 
     return run_client(args.name, args.data)

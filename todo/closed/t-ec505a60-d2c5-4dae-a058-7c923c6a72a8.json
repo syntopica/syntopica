@@ -2,7 +2,7 @@
   "tadu": 2,
   "id": "t-ec505a60-d2c5-4dae-a058-7c923c6a72a8",
   "title": "Ship the refresh job, lock and SessionEnd hook with the setup instead of leaving them in a private dotfiles repo",
-  "state": "pending",
+  "state": "done",
   "category": "general",
   "type": "feature",
   "priority": "normal",
@@ -14,5 +14,10 @@
   ],
   "done_when": [
     "A 'syntopica schedule' (or documented step) installs refresh + context service + hooks + plugin from public repos, and atrium doctor is all ok on a fresh machine"
+  ],
+  "closed": "2026-11-23",
+  "result": "Ship the refresh job, lock and SessionEnd hook with the setup instead of leaving them in a private dotfiles repo",
+  "evidence": [
+    "syntopica schedule writes and loads dev.syntopica.atrium-refresh and dev.syntopica.atrium-context; atrium 868c6db ships bin/atrium-refresh and hooks/claude-code/session-end-refresh.sh; AGENTS.md step 9 documents the command, the SessionEnd hook and the atrium-context plugin. Verified 2026-11-23 on a throwaway instance: both jobs bootstrapped under launchd, serve-context bound its socket, the hook kickstarted the refresh, bin/atrium-refresh ran end to end with exit 0 and atrium doctor reported every check ok. Not exercised there: the plugin install commands."
   ]
 }

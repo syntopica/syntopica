@@ -212,6 +212,56 @@ to run `atrium record-session --checkpoint <id>`; the record lands in
 `<data>/atrium/synthesis/records/`. How it decides and what it refuses:
 `engines/atrium/docs/designs/session-producer.md`.
 
+### 9. Keep the index fresh, with `atrium` on macOS
+
+Step 6 filled the index once. Nothing refreshes it afterwards, so it stops at
+that day unless a job repeats the export. This step is optional and writes
+**outside** the wiki, so say what it does before running it:
+
+```bash
+syntopica schedule
+```
+
+Result: `loaded dev.syntopica.atrium-refresh` and `loaded
+dev.syntopica.atrium-context`, each with the property list it wrote under
+`~/Library/LaunchAgents`. The first runs `engines/atrium/bin/atrium-refresh`
+every hour: export, merge into the archive, ingest, embed, and a published
+doctor report; it logs to `<data>/atrium/refresh.log`. The second keeps the
+embedding model resident so `atrium context` answers in well under a second.
+Run the command again after moving the wiki or a checkout. launchd is the only
+scheduler supported; on another system, run `atrium-refresh` from that
+system's scheduler with `SYNTOPICA_DATA` set.
+
+With Claude Code, two more pieces make the memory reach every session. The
+per-prompt retrieval plugin, which `atrium doctor` reports as `prompt_hook`
+until it is installed:
+
+```bash
+claude plugin marketplace add /abs/path/to/engines/atrium
+claude plugin install atrium-context@atrium
+```
+
+And a refresh at the end of each session, so what was just discussed is
+retrievable in the next one rather than an hour later. Add to
+`hooks.SessionEnd` in `~/.claude/settings.json`:
+
+```json
+{
+  "hooks": [
+    {
+      "type": "command",
+      "timeout": 10,
+      "command": "sh /abs/path/to/engines/atrium/hooks/claude-code/session-end-refresh.sh"
+    }
+  ]
+}
+```
+
+Result: `atrium doctor` reports every check `ok`, and after a session ends
+`refresh.log` gains either a `refresh start` line or a line saying the last
+refresh was too recent. The hook only asks launchd to start the job from
+`syntopica schedule`, so it does nothing until that command has run.
+
 ## Later
 
 - Update: `git pull` in each `engines/*` checkout, then `uv tool upgrade syntopica`.

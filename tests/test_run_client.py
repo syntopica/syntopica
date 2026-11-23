@@ -26,10 +26,12 @@ def test_brain_only_installs_the_skill_and_no_server(
     data = _instance(tmp_path, {"brain": {}, "engines": {"brain": {"path": "engines/brain"}}})
     monkeypatch.setenv("HOME", str(tmp_path / "home"))
     calls: list[tuple[str, ...]] = []
-    monkeypatch.setattr(
-        "syntopica.run_client.run_client_command",
-        lambda argv: calls.append(argv) or _result(1),
-    )
+
+    def run(argv: tuple[str, ...]) -> subprocess.CompletedProcess[str]:
+        calls.append(argv)
+        return _result(1)
+
+    monkeypatch.setattr("syntopica.run_client.run_client_command", run)
     assert run_client("codex", str(data)) == 0
     assert (tmp_path / "home" / ".codex" / "skills" / "syntopica" / "SKILL.md").exists()
     assert calls == []
