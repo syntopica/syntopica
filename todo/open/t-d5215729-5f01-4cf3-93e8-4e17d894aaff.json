@@ -1,0 +1,17 @@
+{
+  "tadu": 2,
+  "id": "t-d5215729-5f01-4cf3-93e8-4e17d894aaff",
+  "title": "AGENTS.md step 5 commands fail on stock macOS python3; document the working invocation",
+  "state": "pending",
+  "category": "general",
+  "type": "docs",
+  "priority": "normal",
+  "created": "2026-11-23",
+  "notes": [
+    "Found 2026-11-23 installing a fresh instance on a second macOS machine (Darwin 27.2, uv 0.11, pnpm 11) following syntopica AGENTS.md.",
+    "'engines/brain/bin/brain index' and 'bin/brain lint' crash on Python 3.9. Until the launcher is fixed, the doc should use 'uv run --project engines/brain ...' or the venv interpreter, and list python3>=3.12 on PATH as a real prerequisite."
+  ],
+  "done_when": [
+    "Following AGENTS.md verbatim on a stock Mac reaches 'lint: 0 issues' with no workaround"
+  ]
+}

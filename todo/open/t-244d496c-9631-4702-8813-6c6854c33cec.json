@@ -1,0 +1,18 @@
+{
+  "tadu": 2,
+  "id": "t-244d496c-9631-4702-8813-6c6854c33cec",
+  "title": "Fix 'syntopica client claude': claude mcp add swallows the server name as an env var",
+  "state": "pending",
+  "category": "general",
+  "type": "bug",
+  "priority": "high",
+  "created": "2026-11-23",
+  "notes": [
+    "Found 2026-11-23 installing a fresh instance on a second macOS machine (Darwin 27.2, uv 0.11, pnpm 11) following syntopica AGENTS.md.",
+    "mcp_add_command builds: claude mcp add --scope user --env SYNTOPICA_DATA=... atrium -- uv run ... . Claude Code 2.1.330 treats -e/--env as variadic and consumes 'atrium', failing with 'Invalid environment variable format: atrium'. The hub prints 'client: claude mcp add failed' but still installs the skill.",
+    "Working order: claude mcp add --scope user atrium --env SYNTOPICA_DATA=<data> -- uv run --project <checkout> atrium-mcp"
+  ],
+  "done_when": [
+    "syntopica client claude registers atrium on current Claude Code and the readback check passes; a test pins the argv order (name before --env)"
+  ]
+}
