@@ -1,0 +1,18 @@
+{
+  "tadu": 2,
+  "id": "t-76d8555f-b201-4aaf-b896-3403ab20d848",
+  "title": "Read the Codex MCP registration with --json: codex mcp get masks env values, so client and doctor report a correct atrium server as another instance",
+  "state": "pending",
+  "category": "general",
+  "type": "bug",
+  "priority": "normal",
+  "kind": "task",
+  "created": "2026-11-24",
+  "created_by": "agent:claude",
+  "notes": [
+    "Codex 0.171.0 prints 'env: SYNTOPICA_DATA=*****' in plain 'codex mcp get atrium', so mcp_server_status never finds SYNTOPICA_DATA=<data> and returns conflict. Seen on the office Mac 2026-11-24: 'syntopica client codex' exits 1 with 'reported success but no atrium server for this instance is registered' and doctor prints 'registered for another instance or checkout', while 'codex mcp get atrium --json' shows the right checkout and data path."
+  ],
+  "done_when": [
+    "syntopica client codex prints 'registered mcp server atrium' and doctor prints 'registered for this instance' against Codex 0.171.0, with a test feeding the masked plain output."
+  ]
+}
